@@ -21,7 +21,7 @@ const Slider = ({ content, title }: Props) => {
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.5, delay: 0.1 }}
-      className=" max-w-[1300px] "
+      className="max-w-[1300px] container"
     >
       <div className="w-full text-center mt-20 mb-5 text-2xl font-bold">
         {title}

@@ -19,7 +19,7 @@
     @apply px-6 py-3 rounded-lg text-lg font-bold;
   }
   .secondary__btn {
-    @apply px-5 py-3 rounded-md transition-all duration-200 hover:bg-dark-green ;
+    @apply px-5 py-3 rounded-md transition-all duration-200 hover:bg-dark-green;
   }
   .profile__dropdown-item {
     @apply flex items-center justify-between cursor-pointer hover:text-dark-green;
@@ -41,5 +41,12 @@
   }
   .nav__link-mobile {
     @apply capitalize text-xl font-bold text-white hover:text-dark-green  hover:scale-105 transition-all duration-200;
+  }
+  .cardWrapper {
+    @apply xl:w-[700px] md:w-[500px] w-[300px] h-[500px] flex items-center justify-center 
+    border border-soft-gray shadow-md rounded-xl gap-3;
+  }
+  .input {
+    @apply w-full border border-soft-gray py-2 px-2 rounded-md focus:outline-none focus:shadow-md;
   }
 }
