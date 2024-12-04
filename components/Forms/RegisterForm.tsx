@@ -26,7 +26,8 @@ const RegisterForm = () => {
         confirmPassword: confirmPassword,
       })
       .then((res) => {
-        router.push("/sign-up/update-profile");
+        const { user } = res.data;
+        router.push(`/sign-up/update-profile?id=${user.id}`);
       })
       .catch((err) => {
         console.error(err);

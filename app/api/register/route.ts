@@ -50,3 +50,70 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ message: "message", error }, { status: 500 });
   }
 }
+
+interface UpdateReq {
+  id: string;
+  email?: string | null;
+  username?: string | null;
+  password?: string | null;
+  // postCode?: string | null;
+  // address?: string | null;
+  phoneNumber?: string | null;
+}
+
+export async function PUT(req: NextRequest) {
+  try {
+    const { id, ...fields }: UpdateReq = await req.json();
+
+    if (!id) {
+      return NextResponse.json(
+        { message: "User ID is required for updating." },
+        { status: 400 }
+      );
+    }
+
+    // Fetch the existing user record
+    const existingUser = await client.user.findUnique({
+      where: { id },
+    });
+
+    if (!existingUser) {
+      return NextResponse.json({ message: "User not found." }, { status: 404 });
+    }
+
+    // Filter only valid and non-empty values
+    const updateData = Object.fromEntries(
+      Object.entries(fields).filter(
+        ([_, value]) => value != null && value !== ""
+      )
+    );
+
+    if (Object.keys(updateData).length === 0) {
+      return NextResponse.json(
+        { message: "No valid fields provided for update." },
+        { status: 400 }
+      );
+    }
+
+    // Perform the update
+    const updatedUser = await client.user.update({
+      where: { id },
+      data: updateData,
+    });
+
+    // Fetch all users for response (optional)
+    const allUsers = await client.user.findMany();
+
+    return NextResponse.json({
+      message: "User updated successfully.",
+      user: updatedUser,
+      allUser: allUsers,
+    });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      { message: "An error occurred during the update.", error },
+      { status: 500 }
+    );
+  }
+}

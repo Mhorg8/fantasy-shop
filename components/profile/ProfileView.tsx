@@ -6,6 +6,7 @@ import { useState } from "react";
 
 const ProfileView = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
+
   const updateProfileImage = () => {
     setShowModal(true);
   };
