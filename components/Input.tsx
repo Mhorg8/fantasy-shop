@@ -7,12 +7,24 @@ interface Props {
   type: "email" | "password" | "text";
   customStyle?: string;
   haveError?: boolean;
+  containerStyle?: string;
 }
 
 const Input = forwardRef(
-  ({ label, name, placeholder, type, customStyle, haveError }: Props, ref) => {
+  (
+    {
+      label,
+      name,
+      placeholder,
+      type,
+      customStyle,
+      haveError,
+      containerStyle,
+    }: Props,
+    ref
+  ) => {
     return (
-      <div className="flex flex-col gap-1">
+      <div className={`${containerStyle} flex flex-col gap-1 w-full`}>
         <label className="text-sm font-medium capitalize" htmlFor="">
           {label}
         </label>

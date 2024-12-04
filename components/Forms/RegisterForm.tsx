@@ -4,10 +4,33 @@ import { FormEvent } from "react";
 import Input from "../Input";
 import LoginOptions from "./LoginOptions";
 import PrimaryButton from "../PrimaryButton";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const RegisterForm = () => {
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const router = useRouter();
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const { username, password, confirmPassword, email } =
+      Object.fromEntries(formData);
+
+    console.log(username);
+
+    const response = await axios
+      .post("/api/register", {
+        username: username,
+        password: password,
+        email: email,
+        confirmPassword: confirmPassword,
+      })
+      .then((res) => {
+        router.push("/sign-up/update-profile");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   return (
@@ -31,7 +54,7 @@ const RegisterForm = () => {
         type="password"
       />
       <Input
-        name="password"
+        name="confirmPassword"
         label="confirm password"
         placeholder="******"
         type="password"

@@ -4,7 +4,7 @@ import UserProfileDropdown from "./UserProfileDropdown";
 
 const HeaderActions = () => {
   return (
-    <div className="flex items-center gap-3 justify-end flex-1 ">
+    <div className="flex items-center gap-3 justify-end ">
       {/* searchbar  */}
       <div className="hidden md:block">
         <Search />
